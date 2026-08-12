@@ -74,6 +74,20 @@ jobs:
               exit 1
           fi
 
+      - name: Validate inputs
+        env:
+          HOST_PLATFORM: ${{ inputs.host-platform }}
+          TEST_MODE: ${{ inputs.test-mode }}
+        run: |
+          if [[ "$HOST_PLATFORM" != "linux-64" ]] && [[ "$HOST_PLATFORM" != "linux-aarch64" ]]; then
+              echo "Invalid host-platform! Must be one of 'linux-64' or 'linux-aarch64'."
+              exit 1
+          fi
+          if [[ "$TEST_MODE" != "standard" ]] && [[ "$TEST_MODE" != "nightly-pytorch" ]] && [[ "$TEST_MODE" != "nightly-numba-cuda" ]] && [[ "$TEST_MODE" != "nightly-numba-cuda-mlir" ]] && [[ "$TEST_MODE" != "nightly-cuda-core" ]]; then
+              echo "Invalid test mode! Must be one of 'standard', 'nightly-pytorch', 'nightly-numba-cuda', 'nightly-numba-cuda-mlir', or 'nightly-cuda-core'."
+              exit 1
+          fi
+
       - name: Compute Python Test Matrix
         id: compute-matrix
         run: |
