@@ -90,7 +90,7 @@ jobs:
           echo "SCCACHE_PATH=/usr/local/bin/sccache" >> "$GITHUB_ENV"
 
       # xref: https://github.com/orgs/community/discussions/42856#discussioncomment-7678867
-      - name: Adding addtional GHA cache-related env vars
+      - name: Adding additional GHA cache-related env vars
         if: ${{ inputs.build-bindings || inputs.build-core }}
         uses: actions/github-script@v9
         with:
