@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.compute-matrix.outputs.MATRIX) }}
-    if: ${{ github.repository_owner == 'nvidia' && !cancelled() }}
+    if: ${{ github.repository_owner == 'nvidia' && !cancelled() && needs['compute-matrix'].result == 'success' }}
     # TODO: remove continue-on-error once 3.15 is officially supported
     continue-on-error: ${{ startsWith(matrix.PY_VER, '3.15') }}
     runs-on: "windows-${{ matrix.ARCH }}-gpu-${{ matrix.GPU }}-${{ matrix.RUNNER_DRIVER }}-${{ matrix.GPU_COUNT }}"
