@@ -110,7 +110,6 @@ jobs:
           enable-apt: true
 
       - name: Set up Python
-        id: setup-python1
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6.3.0
         with:
           # WAR: setup-python is not relocatable, and cibuildwheel hard-wires to 3.12...
@@ -457,7 +456,6 @@ jobs:
           if-no-files-found: error
 
       - name: Set up Python
-        id: setup-python2
         if: ${{ inputs.test-bindings || inputs.test-core }}
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6.3.0
         with:
