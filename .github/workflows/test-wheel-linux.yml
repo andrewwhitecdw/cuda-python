@@ -74,6 +74,15 @@ jobs:
               exit 1
           fi
 
+      - name: Validate Host Platform
+        env:
+          HOST_PLATFORM: ${{ inputs.host-platform }}
+        run: |
+          case "$HOST_PLATFORM" in
+            linux-64|linux-aarch64) ;;
+            *) echo "Invalid host platform! Must be one of 'linux-64' or 'linux-aarch64'."; exit 1 ;;
+          esac
+
       - name: Compute Python Test Matrix
         id: compute-matrix
         run: |
