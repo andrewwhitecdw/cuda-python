@@ -147,6 +147,7 @@ jobs:
       - name: Set environment variables
         env:
           CUDA_VER: ${{ inputs.cuda-version }}
+          PREV_CUDA_VER: ${{ inputs.prev-cuda-version }}
           HOST_PLATFORM: ${{ inputs.host-platform }}
           PY_VER: ${{ matrix.python-version }}
           SHA: ${{ github.sha }}
@@ -155,6 +156,13 @@ jobs:
       - name: Dump environment
         run: |
           env
+
+      - name: Verify env-vars produced prior CUDA major
+        run: |
+          if [ -z "${BUILD_PREV_CUDA_MAJOR:-}" ]; then
+            echo 'BUILD_PREV_CUDA_MAJOR is not set; PREV_CUDA_VER may not have been passed to env-vars'
+            exit 1
+          fi
 
       - name: Install twine
         run: |
