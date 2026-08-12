@@ -121,7 +121,7 @@ jobs:
       options: ${{ ((matrix.DRIVER == 'latest' || matrix.DRIVER == 'earliest') && '-u root --security-opt seccomp=unconfined --shm-size 16g') || '-u root --security-opt seccomp=unconfined --shm-size 16g --privileged --pid=host' }}
       image: ubuntu:24.04
       env:
-        NVIDIA_VISIBLE_DEVICES: ${{ env.NVIDIA_VISIBLE_DEVICES }}
+        NVIDIA_VISIBLE_DEVICES: ${{ env.NVIDIA_VISIBLE_DEVICES || 'all' }}
         PIP_CACHE_DIR: "/tmp/pip-cache"
     steps:
       - name: Checkout ${{ github.event.repository.name }}
