@@ -147,6 +147,7 @@ jobs:
       - name: Set environment variables
         env:
           CUDA_VER: ${{ inputs.cuda-version }}
+          PREV_CUDA_VER: ${{ inputs.prev-cuda-version }}
           HOST_PLATFORM: ${{ inputs.host-platform }}
           PY_VER: ${{ matrix.python-version }}
           SHA: ${{ github.sha }}
