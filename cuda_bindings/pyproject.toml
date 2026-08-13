@@ -88,7 +88,7 @@ before-build = "pip install delvewheel"
 repair-wheel-command = "delvewheel repair --namespace-pkg cuda -w {dest_dir} {wheel}"
 
 [tool.pytest.ini_options]
-required_plugins = "pytest-benchmark"
+required_plugins = ["pytest-benchmark"]
 addopts = "--benchmark-disable --showlocals --durations=20"
 norecursedirs = ["tests/cython", "examples"]
 xfail_strict = true
